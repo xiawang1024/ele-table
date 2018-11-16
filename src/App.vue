@@ -1,17 +1,20 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+
+    <TableInit></TableInit>
+    <TableList />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TableList from './components/tableList/index.vue'
+import TableInit from './components/tableInit/index.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    TableList,
+    TableInit
   }
 }
 </script>
