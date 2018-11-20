@@ -9,8 +9,10 @@
   },
   "dependencies": {
     "element-ui": "^2.4.9",
+    "file-saver": "^2.0.0",
     "sortablejs": "^1.7.0",
-    "vue": "^2.5.17"
+    "vue": "^2.5.17",
+    "xlsx": "^0.14.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0",

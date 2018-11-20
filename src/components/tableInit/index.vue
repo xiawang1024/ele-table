@@ -56,12 +56,11 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-row style="margin-top:30px">
+    <el-row style="margin-top:30px" type="flex" justify="end">
       <el-date-picker format="yyyy 年 MM 月" value-format="yyyy-MM" v-model="yearAndMonth" type="month" placeholder="选择月">
       </el-date-picker>
-      <el-button type='primary' @click='initTableListHandler'>生成值班列表</el-button>
+      <el-button style="margin-left:30px" type='primary' @click='initTableListHandler'>生成值班表</el-button>
     </el-row>
-    <pre>{{tableData}}</pre>
 
   </div>
 </template>
@@ -119,7 +118,7 @@ export default {
   },
   data() {
     return {
-      prevMonthRestDay: 2,
+      prevMonthRestDay: 3,
       yearAndMonth: '',
       timeLimitList: [
         //三个时间阶段
@@ -139,8 +138,7 @@ export default {
       options: originOptions,
       tableData: [
         {
-          order: '1',
-
+          order: 1,
           one1: [],
           one2: [],
           one3: [],
@@ -306,8 +304,8 @@ export default {
       let weekList = this.initDateList(year, month)
       let maxDay = this.getCurrentDays(year, month)
       maxDay = maxDay - this.prevMonthRestDay
-      let forLen = maxDay / tableLen //循环次数
-      let restLen = maxDay % tableLen //剩余数量
+      let forLen = parseInt(maxDay / tableLen) //循环次数
+      let restLen = parseInt(maxDay % tableLen) //余数量
 
       this.forTable(forLen, restLen, weekList)
     },
@@ -317,23 +315,30 @@ export default {
       for (let i = 0; i < forLen; i++) {
         data.push(...arr)
       }
+      data.push(...arr.slice(0, restLen))
       let tableList = []
       let prevMonthRestDay = this.prevMonthRestDay
+      console.log(data.length)
       for (let i = 0; i < data.length; i++) {
         let item = Object.assign({}, data[i], weekList[i + prevMonthRestDay])
         tableList.push(item)
       }
 
-      let restList = []
+      let nextMonthList = []
+      let nextMonthLen = null
       if (restLen === 0) {
-        restList = []
+        nextMonthList = []
+        nextMonthLen = 0
       } else {
-        restList = arr.slice(-restLen)
+        nextMonthLen = this.tableLen - restLen
+        nextMonthList = arr.slice(-nextMonthLen)
       }
 
-      console.log('------------------------------------')
-      console.log(tableList, restList, restLen)
-      console.log('------------------------------------')
+      // console.log('------------------------------------')
+      // console.log(tableList, nextMonthList, nextMonthLen)
+      // console.log('------------------------------------')
+      console.table(tableList)
+      this.tbList = tableList
     }
   }
 }
