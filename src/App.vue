@@ -3,7 +3,7 @@
 
     <!-- <TableInit></TableInit>
     <TableList /> -->
-    <RizhiSingle></RizhiSingle>
+    <XunJian></XunJian>
   </div>
 </template>
 
@@ -12,6 +12,7 @@ import TableList from './components/tableList/index.vue'
 import TableInit from './components/tableInit/index.vue'
 import Rizhi from './components/rizhi/index.vue'
 import RizhiSingle from './components/rizhi/single.vue'
+import XunJian from './components/xunJian/index.vue'
 
 export default {
   name: 'app',
@@ -19,7 +20,8 @@ export default {
     TableList,
     TableInit,
     Rizhi,
-    RizhiSingle
+    RizhiSingle,
+    XunJian
   }
 }
 </script>
