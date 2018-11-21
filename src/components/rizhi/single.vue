@@ -1,63 +1,69 @@
 <template>
-  <el-table :data="tableData" style="width: 100%" :span-method="arraySpanMethod">
-    <el-table-column label="值班日志" align='center'>
-      <el-table-column label="岗位 \ 班次" align='center' prop='label'></el-table-column>
-      <el-table-column :label="dutyTitle" align='center'>
-        <el-table-column label="值班长" align='center'>
-          <template slot-scope="scope">
-            <el-select v-if='scope.row.type===1' v-model="dutyData.duty.one.name" multiple placeholder="请选择" style="width:100%">
-              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
-            <el-time-picker v-if='scope.row.type===2' value-format='HH:mm:ss' v-model="dutyData.duty.one.time" placeholder="时间" style="width:100%">
-            </el-time-picker>
-            <template v-if='scope.row.type===3'>
-              <el-radio v-model="dutyData.isOk" label="0">正常</el-radio>
-              <el-radio v-model="dutyData.isOk" label="1">异常</el-radio>
+  <div>
+    <el-table :data="tableData" style="width: 100%" :span-method="arraySpanMethod">
+      <el-table-column label="值班日志" align='center'>
+        <el-table-column label="岗位 \ 班次" align='center' prop='label'></el-table-column>
+        <el-table-column :label="dutyTitle" align='center'>
+          <el-table-column label="值班长" align='center'>
+            <template slot-scope="scope">
+              <el-select v-if='scope.row.type===1' v-model="dutyData.duty.one.name" multiple placeholder="请选择" style="width:100%">
+                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+              </el-select>
+              <el-time-picker v-if='scope.row.type===2' value-format='HH:mm:ss' v-model="dutyData.duty.one.time" placeholder="时间" style="width:100%">
+              </el-time-picker>
+              <template v-if='scope.row.type===3'>
+                <el-radio v-model="dutyData.isOk" label="0">正常</el-radio>
+                <el-radio v-model="dutyData.isOk" label="1">异常</el-radio>
+              </template>
+              <el-input v-if='scope.row.type===4' type="textarea" :rows="4" placeholder="请输入内容" v-model="dutyData.notOkDesc">
+              </el-input>
+              <el-input v-if='scope.row.type===5' type="textarea" :rows="2" placeholder="请输入内容" v-model="dutyData.remark">
+              </el-input>
             </template>
-            <el-input v-if='scope.row.type===4' type="textarea" :rows="4" placeholder="请输入内容" v-model="dutyData.notOkDesc">
-            </el-input>
-            <el-input v-if='scope.row.type===5' type="textarea" :rows="2" placeholder="请输入内容" v-model="dutyData.remark">
-            </el-input>
-          </template>
-        </el-table-column>
-        <el-table-column label="维护岗" align='center'>
-          <template slot-scope="scope">
-            <el-select v-if='scope.row.type===1' v-model="dutyData.duty.two.name" multiple placeholder="请选择" style="width:100%">
-              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
-            <el-time-picker v-if='scope.row.type===2' value-format='HH:mm:ss' v-model="dutyData.duty.two.time" placeholder="时间" style="width:100%">
-            </el-time-picker>
+          </el-table-column>
+          <el-table-column label="维护岗" align='center'>
+            <template slot-scope="scope">
+              <el-select v-if='scope.row.type===1' v-model="dutyData.duty.two.name" multiple placeholder="请选择" style="width:100%">
+                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+              </el-select>
+              <el-time-picker v-if='scope.row.type===2' value-format='HH:mm:ss' v-model="dutyData.duty.two.time" placeholder="时间" style="width:100%">
+              </el-time-picker>
 
-          </template>
-        </el-table-column>
-        <el-table-column label="1岗" align='center'>
-          <template slot-scope="scope">
-            <el-select v-if='scope.row.type===1' v-model="dutyData.duty.p1.name" multiple placeholder="请选择" style="width:100%">
-              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
-            <el-time-picker v-if='scope.row.type===2' value-format='HH:mm:ss' v-model="dutyData.duty.p1.time" placeholder="时间" style="width:100%">
-            </el-time-picker>
-          </template>
-        </el-table-column>
-        <el-table-column label="2岗" align='center'>
-          <template slot-scope="scope" style="width:100%">
-            <el-select v-if='scope.row.type===1' v-model="dutyData.duty.p2.name" multiple placeholder="请选择">
-              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
-            <el-time-picker v-if='scope.row.type===2' value-format='HH:mm:ss' v-model="dutyData.duty.p2.time" placeholder="时间" style="width:100%">
-            </el-time-picker>
-          </template>
+            </template>
+          </el-table-column>
+          <el-table-column label="1岗" align='center'>
+            <template slot-scope="scope">
+              <el-select v-if='scope.row.type===1' v-model="dutyData.duty.p1.name" multiple placeholder="请选择" style="width:100%">
+                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+              </el-select>
+              <el-time-picker v-if='scope.row.type===2' value-format='HH:mm:ss' v-model="dutyData.duty.p1.time" placeholder="时间" style="width:100%">
+              </el-time-picker>
+            </template>
+          </el-table-column>
+          <el-table-column label="2岗" align='center'>
+            <template slot-scope="scope" style="width:100%">
+              <el-select v-if='scope.row.type===1' v-model="dutyData.duty.p2.name" multiple placeholder="请选择">
+                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+              </el-select>
+              <el-time-picker v-if='scope.row.type===2' value-format='HH:mm:ss' v-model="dutyData.duty.p2.time" placeholder="时间" style="width:100%">
+              </el-time-picker>
+            </template>
+          </el-table-column>
+
         </el-table-column>
 
       </el-table-column>
 
-    </el-table-column>
+    </el-table>
+    <el-row style="margin-top:30px" type="flex" justify="end">
+      <el-button type="primary" @click="submitRizhi">提交</el-button>
+    </el-row>
+  </div>
 
-  </el-table>
 </template>
 
 <script>
@@ -145,6 +151,9 @@ export default {
           return [1, 4]
         }
       }
+    },
+    submitRizhi() {
+      alert('tijiao')
     }
   }
 }
