@@ -3,7 +3,7 @@
 
     <!-- <TableInit></TableInit>
     <TableList /> -->
-    <Rizhi></Rizhi>
+    <RizhiSingle></RizhiSingle>
   </div>
 </template>
 
@@ -11,13 +11,15 @@
 import TableList from './components/tableList/index.vue'
 import TableInit from './components/tableInit/index.vue'
 import Rizhi from './components/rizhi/index.vue'
+import RizhiSingle from './components/rizhi/single.vue'
 
 export default {
   name: 'app',
   components: {
     TableList,
     TableInit,
-    Rizhi
+    Rizhi,
+    RizhiSingle
   }
 }
 </script>
