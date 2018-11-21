@@ -1,20 +1,23 @@
 <template>
   <div id="app">
 
-    <TableInit></TableInit>
-    <TableList />
+    <!-- <TableInit></TableInit>
+    <TableList /> -->
+    <Rizhi></Rizhi>
   </div>
 </template>
 
 <script>
 import TableList from './components/tableList/index.vue'
 import TableInit from './components/tableInit/index.vue'
+import Rizhi from './components/rizhi/index.vue'
 
 export default {
   name: 'app',
   components: {
     TableList,
-    TableInit
+    TableInit,
+    Rizhi
   }
 }
 </script>

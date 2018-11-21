@@ -67,7 +67,7 @@
       </el-table-column>
 
     </el-table>
-    <el-row>
+    <el-row style="margin-top:30px" type="flex" justify="end">
       <el-button type="primary" @click="exportExcel">导出Excel</el-button>
     </el-row>
   </div>
