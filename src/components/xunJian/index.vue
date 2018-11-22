@@ -1,14 +1,29 @@
 <template>
-  <el-table :data="tableData" border style="width: 100%">
-    <template v-for="column of headData">
-      <el-table-column :prop="column.prop" :label="column.label" :key='column.prop' align="center">
+  <div>
+    <el-row type="flex" justify="end" style="margin-bottom:30px;">
+      <el-button type='primary' @click="addIns">
+        新增记录
+      </el-button>
+      <el-button type='primary'>
+        提交记录
+      </el-button>
+    </el-row>
+    <el-table :data="tableData" border style="width: 100%">
+      <template v-for="column of headData">
+        <el-table-column :prop="column.prop" :label="column.label" :key='column.prop' align="center">
+          <template slot-scope="scope">
+            <RenderWx :obj='scope.row[column.prop]'>
+            </RenderWx>
+          </template>
+        </el-table-column>
+      </template>
+      <el-table-column fixed="right" label="操作" width="100" align="center">
         <template slot-scope="scope">
-          <RenderWx :obj='scope.row[column.prop]'>
-          </RenderWx>
+          <el-button type="danger" size="mini" @click="removeIns(scope.$index,scope.row)">删除</el-button>
         </template>
       </el-table-column>
-    </template>
-  </el-table>
+    </el-table>
+  </div>
 </template>
 
 <script>
@@ -68,10 +83,11 @@ export default {
           ins5: { type: 1, value: false },
           ins6: { type: 0, value: '中波' },
           ins7: { type: 0, value: '交通' },
-          ins8: { type: 1, value: false }
+          ins8: { type: 1, value: false },
+          ins9: { type: -1, value: false }
         },
         {
-          ins0: { type: 0, value: '2301' },
+          ins0: { type: 0, value: '2302' },
           ins1: { type: 1, value: false },
           ins2: { type: 1, value: false },
           ins3: { type: 1, value: false },
@@ -82,7 +98,7 @@ export default {
           ins8: { type: 1, value: false }
         },
         {
-          ins0: { type: 0, value: '2301' },
+          ins0: { type: 0, value: '2303' },
           ins1: { type: 1, value: false },
           ins2: { type: 1, value: false },
           ins3: { type: 1, value: false },
@@ -93,6 +109,28 @@ export default {
           ins8: { type: 1, value: false }
         }
       ]
+    }
+  },
+
+  mounted() {},
+  methods: {
+    addIns() {
+      let addIns = {
+        ins0: { type: 0, value: '' },
+        ins1: { type: 1, value: false },
+        ins2: { type: 1, value: false },
+        ins3: { type: 1, value: false },
+        ins4: { type: 1, value: false },
+        ins5: { type: 1, value: false },
+        ins6: { type: 0, value: '' },
+        ins7: { type: 0, value: '' },
+        ins8: { type: 1, value: false }
+      }
+      let newData = [...this.tableData, addIns]
+      this.tableData = newData
+    },
+    removeIns(index, row) {
+      this.tableData.splice(index, 1)
     }
   }
 }
