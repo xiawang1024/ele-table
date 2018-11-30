@@ -1,8 +1,8 @@
 <template>
   <div id="app">
 
-    <!-- <TableInit></TableInit> -->
-    <TableList />
+    <TableInit></TableInit>
+    <!-- <TableList /> -->
     <!-- <AddIns></AddIns> -->
     <!-- <tree></tree> -->
   </div>

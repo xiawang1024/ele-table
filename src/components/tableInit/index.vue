@@ -337,6 +337,9 @@ export default {
         year++;
         month %= 12;
       }
+      if (month < 10) {
+        month = `0${month}`;
+      }
       return [year, month];
     },
     //获取某月有多少天
@@ -354,18 +357,26 @@ export default {
       let dateList = [];
       for (let i = 1; i <= days; i++) {
         let weekIndex = (firstWeek + i - 1) % 7;
-        let day = `${this.yearAndMonth}-${i}`;
+        let day = `${year}-${month}-${i}`;
         dateList.push({
           day,
           week: weekList[weekIndex]
         });
       }
+      console.log("------------------------------------");
+      console.log(`${year}-${month}`);
+      console.log("------------------------------------");
       return dateList;
     },
     //nextMonth 多余列表
     initNextMonthList(list) {
       let [year, month] = this.getNextMonth();
+
       let weekList = this.initDateList(year, month);
+      console.log("------------------------------------");
+      console.log(weekList);
+      console.log("------------------------------------");
+
       let len = list.length;
       let nextList = [];
       if (list && list.length) {
@@ -402,7 +413,7 @@ export default {
       data.push(...arr.slice(0, restLen));
       let tableList = [];
       let prevMonthRestDay = this.prevMonthRestDay;
-      console.log(data.length);
+      // console.log(data.length);
       for (let i = 0; i < data.length; i++) {
         let item = Object.assign({}, data[i], weekList[i + prevMonthRestDay]);
         tableList.push(item);
@@ -422,7 +433,7 @@ export default {
       // console.log(tableList, nextMonthList, nextMonthLen)
       // console.log('------------------------------------')
       nextMonthList = this.initNextMonthList(nextMonthList);
-      console.table(tableList);
+      // console.table(tableList);
       this.tbList = tableList;
     }
   }
